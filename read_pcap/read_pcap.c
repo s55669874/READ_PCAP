@@ -279,6 +279,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 				return;
 			}
 
+			printf("   Port : %d\n", ip->ip_p);
 			printf("   Src : %s:%d\n", inet_ntoa(ip->ip_src), ntohs(tcp->th_sport));
 			printf("   Dst : %s:%d\n", inet_ntoa(ip->ip_dst), ntohs(tcp->th_dport));
 
@@ -294,6 +295,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 		case IPPROTO_UDP:
 			printf("  UDP\n");
 			udp = (struct sniff_udp*)(packet + SIZE_ETHERNET + size_ip);
+			printf("   Port : %d\n", ip->ip_p);
 			printf("   Src : %s:%d\n", inet_ntoa(ip->ip_src), ntohs(udp->u_sport));
 			printf("   Dst : %s:%d\n", inet_ntoa(ip->ip_dst), ntohs(udp->u_dport));
 			printf("   Payload (%d bytes)\n", ntohs(udp->u_len) - 8);
@@ -307,6 +309,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 		case 89://number of ospf's port
 			printf("  OSPFIGP\n");
 			udp = (struct sniff_udp*)(packet + SIZE_ETHERNET + size_ip);
+			printf("   Port : %d\n", ip->ip_p);
 			printf("   Src : %s:%d\n", inet_ntoa(ip->ip_src), ntohs(udp->u_sport));
 			printf("   Dst : %s:%d\n", inet_ntoa(ip->ip_dst), ntohs(udp->u_dport));
 			printf("   Payload (%d bytes)\n", ntohs(udp->u_len) - 8);

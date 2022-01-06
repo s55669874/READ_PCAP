@@ -307,7 +307,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 			printf("  IP\n");
 			return;
 		case 89://number of ospf's port
-			printf("  OSPFIGP\n");
+			printf("  OSPF\n");
 			udp = (struct sniff_udp*)(packet + SIZE_ETHERNET + size_ip);
 			printf("   Port : %d\n", ip->ip_p);
 			printf("   Src : %s:%d\n", inet_ntoa(ip->ip_src), ntohs(udp->u_sport));
